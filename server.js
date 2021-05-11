@@ -29,7 +29,10 @@ app.get("/api/notes", (req, res) => {
 app.post("/api/notes", (req, res) => {
     let notesJson = fs.readFileSync("./db/db.json");
     let notes = JSON.parse(notesJson);
-    notes.push(req.body);
+    let newNote = req.body;
+    newNote["id"] = notes.length;
+    // TODO: store with unique ID
+    notes.push(newNote);
     notesJson = JSON.stringify(notes);
 
     fs.writeFileSync("./db/db.json", notesJson);
