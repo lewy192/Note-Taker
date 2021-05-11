@@ -21,7 +21,9 @@ app.get("/notes", (req, res) => {
 // api calls
 
 app.get("/api/notes", (req, res) => {
-    res.json(db);
+    let notesJson = fs.readFileSync("./db/db.json");
+    let notes = JSON.parse(notesJson);
+    res.send(notes);
 });
 
 app.post("/api/notes", (req, res) => {
@@ -31,6 +33,7 @@ app.post("/api/notes", (req, res) => {
     notesJson = JSON.stringify(notes);
 
     fs.writeFileSync("./db/db.json", notesJson);
+    res.end("Notes Updated");
 });
 
 app.listen(PORT, () => {

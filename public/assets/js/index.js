@@ -104,6 +104,7 @@ const handleNoteView = (e) => {
 
 // Sets the activeNote to and empty object and allows the user to enter a new note
 const handleNewNoteView = (e) => {
+    noteTitle.value = "";
     activeNote = {};
     renderActiveNote();
 };
@@ -171,8 +172,9 @@ const renderNoteList = async (notes) => {
 
 const displayNoteText = (eventTarget) => {
     const noteContent = JSON.parse(eventTarget.dataset.note);
-    hide(noteTitle);
-    noteText.innerHTML = noteContent.text;
+    console.log(noteContent);
+    noteTitle.value = noteContent.title;
+    noteText.value = noteContent.text;
     noteText.style.fontSize = "20px";
 };
 
