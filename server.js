@@ -5,7 +5,7 @@ const app = express();
 // db import
 const db = require("./db/db.json");
 
-const PORT = 8080;
+var PORT = process.env.PORT || 3001;
 
 app.use(express.static("public"));
 app.use(express.json());
