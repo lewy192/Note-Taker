@@ -23,14 +23,15 @@ app.get("/notes", (req, res) => {
 app.get("/api/notes", (req, res) => {
     let notesJson = fs.readFileSync("./db/db.json");
     let notes = JSON.parse(notesJson);
-    res.send(notes);
+    res.send(notes.slice(1));
 });
 
 app.post("/api/notes", (req, res) => {
     let notesJson = fs.readFileSync("./db/db.json");
     let notes = JSON.parse(notesJson);
     let newNote = req.body;
-    newNote["id"] = notes.length;
+    newNote["id"] = notes[0].id;
+    notes[0].id += 1;
     // TODO: store with unique ID
     notes.push(newNote);
     notesJson = JSON.stringify(notes);
